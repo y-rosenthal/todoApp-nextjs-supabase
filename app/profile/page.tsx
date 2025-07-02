@@ -8,7 +8,7 @@ import { useSubscription } from "@/hooks/useSubscription";
 import { useAuth } from "@/hooks/useAuth";
 
 export default function Profile() {
-  const { user, isLoading, signOut } = useAuth();
+  const { user, profile, isLoading, signOut } = useAuth();
   const { session } = useAuth();
   const { manageSubscription } = useSubscription();
 
@@ -25,6 +25,14 @@ export default function Profile() {
         <CardContent className="text-sm">
           <p>Name: {user.name}</p>
           <p>Email: {user.email}</p>
+        </CardContent>
+      </Card>
+      <Card>
+        <CardHeader>
+          <CardTitle>Gamification</CardTitle>
+        </CardHeader>
+        <CardContent className="text-sm">
+          <p>Points: {profile?.points ?? 0}</p>
         </CardContent>
       </Card>
       <Card>

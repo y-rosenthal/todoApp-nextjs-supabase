@@ -18,6 +18,7 @@ export type Database = {
           tasks_limit: number | null
           updated_at: string | null
           user_id: string
+          points: number | null
         }
         Insert: {
           created_at?: string | null
@@ -27,6 +28,7 @@ export type Database = {
           tasks_limit?: number | null
           updated_at?: string | null
           user_id: string
+          points?: number | null
         }
         Update: {
           created_at?: string | null
@@ -36,6 +38,7 @@ export type Database = {
           tasks_limit?: number | null
           updated_at?: string | null
           user_id?: string
+          points?: number | null
         }
         Relationships: []
       }

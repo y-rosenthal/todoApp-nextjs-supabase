@@ -1,4 +1,4 @@
-import { User } from "./models";
+import { User, Profile } from "./models";
 
 export interface BaseState {
   isLoading: boolean;
@@ -7,6 +7,7 @@ export interface BaseState {
 
 export interface AuthState extends BaseState {
   user: User | null;
+  profile: Profile | null;
   session: any;
   isLoggedIn: boolean;
   email: string;
@@ -23,6 +24,7 @@ export interface AuthOperations {
   setPassword: (value: string) => void;
   setIsSignUpMode: (value: boolean) => void;
   clearError: () => void;
+  updateUserProfile: (updates: Partial<Profile>) => Promise<void>;
 }
 
 export type UseAuthReturn = AuthState & AuthOperations;

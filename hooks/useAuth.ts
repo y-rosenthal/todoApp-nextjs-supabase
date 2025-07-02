@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { User } from "@/types/models";
+import { User, Profile } from "@/types/models";
 import { UseAuthReturn } from "@/types/auth";
 import { useRouter } from "next/navigation";
 
@@ -19,11 +19,23 @@ export function useAuth(): UseAuthReturn {
     tasks_created: 0,
   };
 
+  const dummyProfile: Profile = {
+    user_id: "dummy-user-id",
+    name: "Dummy User",
+    created_at: new Date().toISOString(),
+    updated_at: new Date().toISOString(),
+    stripe_customer_id: null,
+    subscription_plan: "free",
+    tasks_limit: 100,
+    points: 0,
+  };
+
   // State with dummy values
   const [session, setSession] = useState<any>({
     user: { id: "dummy-session-id" },
   });
   const [user, setUser] = useState<User | null>(dummyUser);
+  const [profile, setProfile] = useState<Profile | null>(dummyProfile);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [isLoggedIn, setIsLoggedIn] = useState(true);
@@ -71,6 +83,10 @@ export function useAuth(): UseAuthReturn {
     router.push("/dashboard");
   };
 
+  const updateUserProfile = async (updates: Partial<Profile>) => {
+    console.log("TODO: Implement updateUserProfile with:", updates);
+  };
+
   // Mock initialization
   useEffect(() => {
     console.log("TODO: Implement auth initialization");
@@ -81,6 +97,7 @@ export function useAuth(): UseAuthReturn {
   return {
     // State
     user,
+    profile,
     session,
     email,
     password,
@@ -98,5 +115,6 @@ export function useAuth(): UseAuthReturn {
     setPassword,
     setIsSignUpMode,
     clearError,
+    updateUserProfile,
   };
 }

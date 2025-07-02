@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { useAuth } from "@/hooks/useAuth";
 import { Task } from "@/types/models";
 import {
   TaskState,
@@ -28,6 +29,7 @@ const DUMMY_TASK: Task = {
 };
 
 export function useTaskManager(taskId?: string): UseTaskManagerReturn {
+  const { user, profile, updateUserProfile } = useAuth();
   const [task, setTask] = useState<Task | null>(DUMMY_TASK);
   const [date, setDate] = useState<Date | undefined>(undefined);
   const [tasks, setTasks] = useState<Task[]>([DUMMY_TASK]);
@@ -65,6 +67,10 @@ export function useTaskManager(taskId?: string): UseTaskManagerReturn {
     taskIdToToggle: string,
     completed: boolean
   ) => {
+    if (completed) {
+      const points = (profile?.points ?? 0) + 10;
+      await updateUserProfile({ points });
+    }
     console.log("TODO: Implement toggleTaskComplete with:", {
       taskIdToToggle,
       completed,
